@@ -1,0 +1,30 @@
+5.Menyaring hasil pengelompokan (HAVING): Menampilkan program studi yang memiliki lebih dari 1 mata kuliah:   
+SELECT kode_prodi, COUNT(*) AS jumlah_matkul
+FROM mata_kuliah
+GROUP BY kode_prodi
+HAVING COUNT(*) > 1;
+
+Tahap 6: Penggabungan Antar-Tabel (INNER JOIN & LEFT JOIN)
+Menghubungkan dua tabel atau lebih menggunakan kunci relasi (Primary Key & Foreign Key):   
+1.Menggabungkan 2 tabel (mahasiswa dan program_studi) dengan INNER JOIN:
+SELECT m.nim, m.nama_mhs, p.nama_prodi
+FROM mahasiswa AS m
+INNER JOIN program_studi AS p ON m.kode_prodi = p.kode_prodi;
+
+2.Menggabungkan 3 tabel (kelas_kuliah, mata_kuliah, dan dosen) dengan INNER JOIN:
+SELECT m.kode_mk, m.nama_mk, k.nama_kelas, d.nama_dosen
+FROM kelas_kuliah AS k
+INNER JOIN mata_kuliah AS m ON k.kode_mk = m.kode_mk
+INNER JOIN dosen AS d ON k.kode_induk_dosen = d.kode_induk_dosen;
+
+3.Menggabungkan 3 tabel (krs, mahasiswa, dan mata_kuliah) dengan INNER JOIN:
+SELECT m.nim, m.nama_mhs, mk.kode_mk, mk.nama_mk
+FROM krs AS k
+INNER JOIN mahasiswa AS m ON k.nim = m.nim
+INNER JOIN mata_kuliah AS mk ON k.kode_mk = mk.kode_mk;
+
+4.Mencari data yang tidak berpasangan (LEFT JOIN + IS NULL): Menampilkan program studi yang belum memiliki mahasiswa sama sekali (hasilnya adalah P04 - Pemikiran Masyarakat Islam):   
+SELECT p.kode_prodi, p.nama_prodi
+FROM program_studi AS p
+LEFT JOIN mahasiswa AS m ON p.kode_prodi = m.kode_prodi
+WHERE m.nim IS NULL;
