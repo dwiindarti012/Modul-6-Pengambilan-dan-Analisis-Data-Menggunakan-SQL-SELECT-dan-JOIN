@@ -1,0 +1,1 @@
+# Modul-6-Pengambilan-dan-Analisis-Data-Menggunakan-SQL-SELECT-dan-JOIN
