@@ -1,0 +1,49 @@
+Tahap 4: Penyaringan Data (WHERE, LIKE, IN, AND, BETWEEN)
+Menampilkan data berdasarkan kriteria atau kondisi spesifik:   
+1.Pencarian pola karakter (LIKE): Menampilkan mahasiswa yang huruf ke-4 pada namanya adalah 'i' (menggunakan 3 tanda garis bawah ___):   
+SELECT nim, nama_mhs, jenis_kelamin
+FROM mahasiswa
+WHERE nama_mhs LIKE '___i%';
+
+2.Pencarian berdasarkan daftar nilai (IN): Menampilkan mahasiswa dengan tahun angkatan '2025' atau '2026':   
+SELECT nim, nama_mhs, tahun_angkatan
+FROM mahasiswa
+WHERE tahun_angkatan IN ('2025', '2026');
+
+3.Pencarian dengan dua kondisi (AND): Menampilkan dosen laki-laki ('L') yang mengajar di prodi 'P03':   
+SELECT nama_dosen, jenis_kelamin, kode_prodi
+FROM dosen
+WHERE kode_prodi = 'P03'
+  AND jenis_kelamin = 'L';
+
+4.Pencarian rentang nilai (BETWEEN) dan pengurutan menurun (DESC): Menampilkan mata kuliah dengan jumlah SKS antara 2 sampai 3, diurutkan dari SKS terbesar:   
+SELECT kode_mk, nama_mk, jumlah_sks
+FROM mata_kuliah
+WHERE jumlah_sks BETWEEN 2 AND 3
+ORDER BY jumlah_sks DESC;
+
+5.Kombinasi WHERE, ORDER BY, dan LIMIT: Menampilkan 5 nilai akhir tertinggi yang diampu oleh dosen dengan kode 'DTI05':   
+SELECT nim, nilai_akhir, kode_induk_dosen
+FROM nilai
+WHERE kode_induk_dosen = 'DTI05'
+ORDER BY nilai_akhir DESC
+LIMIT 5;
+
+Tahap 5: Fungsi Agregasi & Pengelompokan (COUNT, GROUP BY, HAVING)Menghitung rekapitulasi jumlah data dan mengelompokkannya berdasarkan kategori tertentu:   
+1.Menghitung total seluruh dosen dan dosen yang memiliki email (COUNT):
+SELECT
+    COUNT(*) AS total_semua_dosen,
+    COUNT(email) AS total_dosen_punya_email
+FROM dosen;
+
+2.Menghitung jumlah mahasiswa per program studi (GROUP BY):
+SELECT kode_prodi, COUNT(*) AS jumlah_mahasiswa
+FROM mahasiswa
+GROUP BY kode_prodi
+ORDER BY kode_prodi;
+
+3.Menghitung jumlah kelas yang diampu oleh masing-masing dosen (GROUP BY):
+SELECT kode_induk_dosen, COUNT(*) AS jumlah_kelas
+FROM kelas_kuliah
+GROUP BY kode_induk_dosen
+ORDER BY kode_induk_dosen;
