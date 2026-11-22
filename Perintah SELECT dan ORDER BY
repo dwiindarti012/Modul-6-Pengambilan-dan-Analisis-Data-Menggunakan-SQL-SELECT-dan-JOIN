@@ -1,0 +1,24 @@
+Tahap 1: Persiapan & Aktivasi Database
+Mengaktifkan database db_dwi_indarti_wardani dan mengecek daftar tabel yang tersedia:   
+USE db_dwi_indarti_wardani;
+SHOW TABLES;
+
+Tahap 2: Basic Query (SELECT)
+Menampilkan seluruh kolom maupun kolom tertentu dari tabel program_studi:   1.Menampilkan seluruh data pada tabel program_studi:
+SELECT * FROM program_studi;
+
+2.Menampilkan kolom spesifik (kode_prodi dan nama_prodi):
+SELECT kode_prodi, nama_prodi
+FROM program_studi;
+
+Tahap 3: Pengurutan & Pembatasan Data (ORDER BY & LIMIT)
+Mengurutkan data berdasarkan abjad atau nilai tertentu serta membatasi jumlah baris yang tampil:   
+1.Mengurutkan data mahasiswa berdasarkan nama secara menaik (ASC):
+FROM mahasiswa
+ORDER BY nama_mhs ASC;
+
+2.Menampilkan 5 mata kuliah pertama berdasarkan urutan abjad nama mata kuliah (LIMIT 5):
+SELECT kode_mk, nama_mk, jumlah_sks
+FROM mata_kuliah
+ORDER BY nama_mk ASC
+LIMIT 5;
